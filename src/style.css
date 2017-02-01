@@ -8,7 +8,7 @@
     display:block;
     font:bold 14px/152px helvetica, arial, sans-serif;
     text-indent: 36px;
-    background: -webkit-linear-gradient(top, #fff 0%, #fff 50%, #db3f02 50%, #db3f02 100%);
+    background: -webkit-linear-gradient(top, #fff 0%, #fff 35%, orange 35%, orange 100%);
     border-radius:22px 22px 0 0;
     border:5px solid #4a1c03;
     border-bottom:none;
@@ -27,7 +27,7 @@
     left:-16px;
     z-index:-1;
     /* Place the bulb under the column */
-    background:#db3f02;
+    background:orange;
     border-radius:44px;
     border:5px solid #4a1c03;
     box-shadow:inset 0 0 0 4px #fff;
@@ -41,7 +41,7 @@
     position:absolute;
     top:146px;
     left:4px;
-    background:#db3f02;
+    background:orange;
 }
 .temp-controls {
     margin-bottom: 5em;

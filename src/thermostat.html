@@ -13,46 +13,58 @@
 
     <script>
         $(document).ready(function() {
-            var currentTemp = 20;
+            var $currentTemp = 20;
             var $currentPercent = 35;
             var $oneDegree = 5;
             var $bubbleColor;
             thermBackground = function() {
-                $(".thermometer").css("background", "-webkit-linear-gradient(top, #fff 0%, #fff " + $currentPercent + "%, #db3f02 " + $currentPercent + "%, #db3f02 100%");
-            }
+                $(".thermometer").css("background", "-webkit-linear-gradient(top, #fff 0%, #fff " + $currentPercent + "%, " + $bubbleColor + " " + $currentPercent + "%, " + $bubbleColor + " 100%");
+            };
             bubbleBackground = function() {
                 $(".thermometer:before").css("background", $bubbleColor);
                 if($currentTemp < 18) {
                     $bubbleColor = "green";
+                    $('head').append('<style>.thermometer:before, .thermometer:after{background:' + $bubbleColor + '!important;}</style>');
                 }
                 else if($currentTemp < 25) {
                     $bubbleColor = "orange";
+                    $('head').append('<style>.thermometer:before, .thermometer:after{background:' + $bubbleColor + '!important;}</style>');
                 }
                 else {
                     $bubbleColor = "red";
+                    $('head').append('<style>.thermometer:before, .thermometer:after{background:' + $bubbleColor + '!important;}</style>');
                 }
-            }
+            };
             $(".temp-down").click(function(event) {
                 $currentPercent += $oneDegree;
-                currentTemp -= 1;
-                thermBackground();
+                $currentTemp -= 1;
                 bubbleBackground();
+                thermBackground();                
+                $(".thermometer").html($currentTemp + "&deg;C");
             });
             $(".temp-up").click(function(event) {
                 $currentPercent -= $oneDegree;
-                currentTemp += 1;
-                thermBackground();
-                bubbleBackground();
+                $currentTemp += 1;
+                 bubbleBackground();
+                thermBackground();               
+                $(".thermometer").html($currentTemp + "&deg;C");
             });
             $(".temp-reset").click(function(event) {
                 $currentPercent = 35;
-                currentTemp = 20;
-                thermBackground();
+                $currentTemp = 20;
                 bubbleBackground();
+                thermBackground();               
+                $(".thermometer").html($currentTemp + "&deg;C");
             });
             $(".power-saving").click(function(event){
 
             });
+
+
+
+$("#regTitle").html("Hello World");
+
+
         });
     </script>
     <div class="topbar">
