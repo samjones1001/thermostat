@@ -11,13 +11,16 @@ Thermostat.prototype.temp = function() {
 };
 
 Thermostat.prototype.up = function(num) {
+    if((this._currentTemp + num) > this._maxTemp)  {
+        throw new Error('Cannot exceed max temperature of ' + this._maxTemp);
+    }
     this._currentTemp += num;
 };
 
 Thermostat.prototype.down = function(num) {
 	if((this._currentTemp - num) < 10) {
 		throw new Error('Cannot lower temperature below 10');
-	};
+	}
     this._currentTemp -= num;
 };
 
@@ -36,7 +39,11 @@ Thermostat.prototype.switchPowerSaving = function() {
 	} else {
 		this._powerSaving = true;
 		this._maxTemp = 25;
-	};
+	}
 };
 
-
+Thermostat.prototype.energyUsage = function() {
+	if(this._currentTemp < 18) { return "Low usage"; }
+	if(this._currentTemp < 25) { return "Medium usage"; }
+	return "High usage";
+};
