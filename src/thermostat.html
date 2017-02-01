@@ -13,8 +13,8 @@
 
     <script>
         $(document).ready(function() {
-            var $currentTemp = 20;
-            var $currentPercent = 35;
+            $thermostat = new Thermostat;
+            var $currentPercent = $thermostat._currentTemp;
             var $oneDegree = 5;
             var $bubbleColor;
             thermBackground = function() {
@@ -22,71 +22,75 @@
             };
             bubbleBackground = function() {
                 $(".thermometer:before").css("background", $bubbleColor);
-                if($currentTemp < 18) {
+                if ($thermostat._currentTemp < 18) {
                     $bubbleColor = "green";
                     $('head').append('<style>.thermometer:before, .thermometer:after{background:' + $bubbleColor + '!important;}</style>');
-                }
-                else if($currentTemp < 25) {
+                } else if ($thermostat._currentTemp < 25) {
                     $bubbleColor = "orange";
                     $('head').append('<style>.thermometer:before, .thermometer:after{background:' + $bubbleColor + '!important;}</style>');
-                }
-                else {
+                } else {
                     $bubbleColor = "red";
                     $('head').append('<style>.thermometer:before, .thermometer:after{background:' + $bubbleColor + '!important;}</style>');
                 }
             };
             $(".temp-down").click(function(event) {
                 $currentPercent += $oneDegree;
-                $currentTemp -= 1;
-                bubbleBackground();
-                thermBackground();                
-                $(".thermometer").html($currentTemp + "&deg;C");
+                $thermostat.down(1);
+                if ($thermostat._currentTemp >= $thermostat._minTemp) {
+                    bubbleBackground();
+                    thermBackground();
+                    $(".thermometer").html($thermostat._currentTemp + "&deg;C");
+                } else {
+                    $("h2").html("Cannot lower temperature below " + $thermostat._minTemp);
+                };
             });
             $(".temp-up").click(function(event) {
                 $currentPercent -= $oneDegree;
-                $currentTemp += 1;
-                 bubbleBackground();
-                thermBackground();               
-                $(".thermometer").html($currentTemp + "&deg;C");
+                $thermostat.up(1);
+                if ($thermostat._currentTemp <= $thermostat._maxTemp) {
+                    bubbleBackground();
+                    thermBackground();
+                    $(".thermometer").html($thermostat._currentTemp + "&deg;C");
+                } else {
+                    $("h2").html("Cannot exceed max temperature of " + $thermostat._maxTemp);
+                };
             });
             $(".temp-reset").click(function(event) {
                 $currentPercent = 35;
-                $currentTemp = 20;
+                $thermostat.reset();
                 bubbleBackground();
-                thermBackground();               
-                $(".thermometer").html($currentTemp + "&deg;C");
+                thermBackground();
+                $(".thermometer").html($thermostat._currentTemp + "&deg;C");
             });
-            $(".power-saving").click(function(event){
+            $(".power-saving").click(function(event) {
 
             });
-
-
-
-$("#regTitle").html("Hello World");
+            $("#regTitle").html("Hello World");
 
 
         });
     </script>
     <div class="topbar">
         <h1>Thermostat</h1>
+        <h2 class="error"></h2>
     </div>
     <main>
         <div class="left">
             <div class="temp-controls">
-                <span class="temp-down">
+                <button class="temp-down">
                     DOWN
-                </span>
-                <span class="temp-up">
+                </button>
+                <button class="temp-up">
                     UP
-                </span>
-                <span class="temp-reset">
+                </button>
+                <button class="temp-reset">
                     RESET
-                </span>
+                </button>
             </div>
             <div class="power-saving">
-                <span class="power-saving-butt">
+                <button class="power-saving-butt">
                     POWER SAVING ON/OFF
-                </span>
+                </button>
             </div>
         </div>
         <div class="right">

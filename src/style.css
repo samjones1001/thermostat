@@ -57,18 +57,17 @@ h1 {
     font-size: 2vw;
     text-align: center;
 }
-.temp-down, .temp-up, .temp-reset, .power-saving {
+.temp-down, .temp-up, .temp-reset, .power-saving-butt {
     color: #fff;
     background-color: deepskyblue;
-    width: 4em;
     height: 1em;
+    font-size: 1vw;
     text-align: center;
-    vertical-align: middle;
     font-family: sans-serif;
-    padding: 10px;
+    padding: 2em;
     border-radius: 10px;
     box-shadow: 0 0 4px 0px #828282;
-    margin-right:.5em;
+    margin-right: .5em;
 }
 .left {
     width: 70%;

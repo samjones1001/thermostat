@@ -2,6 +2,7 @@
 
 function Thermostat() {
     this._currentTemp = 20;
+	this._minTemp = 10;
     this._maxTemp = 25;
     this._powerSaving = true;
 }
@@ -12,14 +13,18 @@ Thermostat.prototype.temp = function() {
 
 Thermostat.prototype.up = function(num) {
     if((this._currentTemp + num) > this._maxTemp)  {
-        throw new Error('Cannot exceed max temperature of ' + this._maxTemp);
+		var maxError = 'Cannot exceed max temperature of ' + this._maxTemp;
+		alert(maxError);
+        throw new Error(maxError);
     }
     this._currentTemp += num;
 };
 
 Thermostat.prototype.down = function(num) {
-	if((this._currentTemp - num) < 10) {
-		throw new Error('Cannot lower temperature below 10');
+	if((this._currentTemp - num) < this._minTemp) {
+		var minError = 'Cannot lower temperature below ' + this._maxTemp;
+		alert(minError);
+        throw new Error(minError);
 	}
     this._currentTemp -= num;
 };
