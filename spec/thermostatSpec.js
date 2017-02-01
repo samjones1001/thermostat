@@ -17,4 +17,10 @@ describe('Thermostat', function(){
     thermostat.decrease();
     expect(thermostat.getCurrentTemp()).toEqual(19)
   });
+  it('prevents minimum temperature below 10 degrees', function(){
+    for (var i =0; i <= 10; i++){
+      thermostat.decrease();
+    }
+    expect(thermostat.getCurrentTemp()).toEqual(10);
+  });
 });
