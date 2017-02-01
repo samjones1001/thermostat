@@ -20,6 +20,19 @@ describe('Thermostat', function() {
         expect(function(){ thermostat.down(20); }).toThrowError('Cannot lower temperature below 10');
     });
     it('can reset the temperature to 20', function() {
-        expect(thermostat.reset()).not.ToBeUndefined();
+        thermostat.reset()
+        expect(thermostat._currentTemp).toEqual(20);
+    });
+    it('power saving is on by default', function() {
+        expect(thermostat.isPowerSavingOn()).toBe(true);
+    });
+    it('power saving can be switched off', function() {
+        thermostat.switchPowerSaving();
+        expect(thermostat.isPowerSavingOn()).toBe(false);
+    });
+    it('switching power modes adjuests max temperature', function() {
+        var defaultTemp = 25;
+        thermostat.switchPowerSaving();
+        expect(thermostat._maxTemp).not.toEqual(defaultTemp)
     });
 });
