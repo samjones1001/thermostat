@@ -9,50 +9,62 @@
 </head>
 
 <body>
-    <script
-    src="https://code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
     <script>
-        $( document ).ready(function() {
-            $(".thermometer").css("background", "-webkit-linear-gradient(top, #fff 0%, #fff 33%, #db3f02 33%, #db3f02 100%")
+        $(document).ready(function() {
+            var $currentPercent = 35;
+            var $oneDegree = 5;
+            var $bubbleColor = "orange";
+            thermBackground = function() {
+                $(".thermometer").css("background", "-webkit-linear-gradient(top, #fff 0%, #fff " + $currentPercent + "%, #db3f02 " + $currentPercent + "%, #db3f02 100%")
+            }
+            bubbleBackfround = function() {
+                $(".thermometer:before").css("background", $bubbleColor);
+            }
+            $(".temp-down").click(function(event) {
+                $currentPercent += $oneDegree;
+                thermBackground()
+            });
+            $(".temp-up").click(function(event) {
+                $currentPercent -= $oneDegree;
+                thermBackground()
+            });
+            $(".temp-reset").click(function(event) {
+                $currentPercent = 35;
+                thermBackground()
+            });
+            $(".power-saving").click(function(event){
+
+            });
         });
-
-        $( ".temp-down" ).click(function( event ) {
-            alert( "DOWN!" );
-        });        
-     
     </script>
-
-    <h1>Thermostat</h1>
+    <div class="topbar">
+        <h1>Thermostat</h1>
+    </div>
     <main>
-        <div class="temp-controls">
-            <span class="temp-down">
-                DOWN
-            </span>
-            <span class="temp-up">
-                UP
-            </span>
-            <span class="temp-reset">
-                RESET
-            </span>
+        <div class="left">
+            <div class="temp-controls">
+                <span class="temp-down">
+                    DOWN
+                </span>
+                <span class="temp-up">
+                    UP
+                </span>
+                <span class="temp-reset">
+                    RESET
+                </span>
+            </div>
+            <div class="power-saving">
+                <span class="power-saving-butt">
+                    POWER SAVING ON/OFF
+                </span>
+            </div>
         </div>
-        <div class="power-saving">
-            <span class="power-saving-butt">
-                POWER SAVING ON/OFF
-            </span>
-        </div>
-        <div class="display">
-            
+        <div class="right">
+            <div class="display">
                 <div class="thermometer">20&deg;C</div>
-                CURRENT TEMP
-                MAX TEMP
-                MIN TEMP
-                ENERGY USAGE
-            
-            <div class="psmode">
-                POWER SAVING MODE
+                CURRENT TEMP MAX TEMP MIN TEMP ENERGY USAGE
             </div>
         </div>
     </main>
