@@ -13,26 +13,42 @@
 
     <script>
         $(document).ready(function() {
+            var currentTemp = 20;
             var $currentPercent = 35;
             var $oneDegree = 5;
-            var $bubbleColor = "orange";
+            var $bubbleColor;
             thermBackground = function() {
-                $(".thermometer").css("background", "-webkit-linear-gradient(top, #fff 0%, #fff " + $currentPercent + "%, #db3f02 " + $currentPercent + "%, #db3f02 100%")
+                $(".thermometer").css("background", "-webkit-linear-gradient(top, #fff 0%, #fff " + $currentPercent + "%, #db3f02 " + $currentPercent + "%, #db3f02 100%");
             }
-            bubbleBackfround = function() {
+            bubbleBackground = function() {
                 $(".thermometer:before").css("background", $bubbleColor);
+                if($currentTemp < 18) {
+                    $bubbleColor = "green";
+                }
+                else if($currentTemp < 25) {
+                    $bubbleColor = "orange";
+                }
+                else {
+                    $bubbleColor = "red";
+                }
             }
             $(".temp-down").click(function(event) {
                 $currentPercent += $oneDegree;
-                thermBackground()
+                currentTemp -= 1;
+                thermBackground();
+                bubbleBackground();
             });
             $(".temp-up").click(function(event) {
                 $currentPercent -= $oneDegree;
-                thermBackground()
+                currentTemp += 1;
+                thermBackground();
+                bubbleBackground();
             });
             $(".temp-reset").click(function(event) {
                 $currentPercent = 35;
-                thermBackground()
+                currentTemp = 20;
+                thermBackground();
+                bubbleBackground();
             });
             $(".power-saving").click(function(event){
 
