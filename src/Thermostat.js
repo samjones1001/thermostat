@@ -38,7 +38,7 @@ Thermostat.prototype.isPowerSavingOn = function() {
 };
 
 Thermostat.prototype.switchPowerSaving = function() {
-	if(this._powerSaving === true) {
+	if(this._powerSaving) {
 		this._powerSaving = false;
 		this._maxTemp = 32;
 	} else {

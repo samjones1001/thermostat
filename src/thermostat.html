@@ -5,71 +5,13 @@
     <meta charset="UTF-8">
     <title>Thermostat</title>
     <script src="Thermostat.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="ui.js"></script>
+    <link href="https://use.fontawesome.com/c6d6077668.css" media="all" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-
-    <script>
-        $(document).ready(function() {
-            $thermostat = new Thermostat;
-            var $oneDegree = (100 / ($thermostat._maxTemp - $thermostat._minTemp));
-            var $currentPercent = ($thermostat._maxTemp - $thermostat._currentTemp) * $oneDegree;
-            var $bubbleColor = "orange";
-            thermBackground = function() {
-                $(".thermometer").css("background", "-webkit-linear-gradient(top, #fff 0%, #fff " + $currentPercent + "%, " + $bubbleColor + " " + $currentPercent + "%, " + $bubbleColor + " 100%");
-            };
-            thermBackground()
-            bubbleBackground = function() {
-                $(".thermometer:before").css("background", $bubbleColor);
-                if ($thermostat._currentTemp < 18) {
-                    $bubbleColor = "green";
-                    $('head').append('<style>.thermometer:before, .thermometer:after{background:' + $bubbleColor + '!important;}</style>');
-                } else if ($thermostat._currentTemp < 25) {
-                    $bubbleColor = "orange";
-                    $('head').append('<style>.thermometer:before, .thermometer:after{background:' + $bubbleColor + '!important;}</style>');
-                } else {
-                    $bubbleColor = "red";
-                    $('head').append('<style>.thermometer:before, .thermometer:after{background:' + $bubbleColor + '!important;}</style>');
-                };
-            };
-            $(".temp-down").click(function(event) {
-                $currentPercent += $oneDegree;
-                $thermostat.down(1);
-                if ($thermostat._currentTemp >= $thermostat._minTemp) {
-                    bubbleBackground();
-                    thermBackground();
-                    $(".thermometer").html($thermostat._currentTemp + "&deg;C");
-                } else {
-                    $(".error").html("Cannot lower temperature below " + $thermostat._minTemp);
-                };
-            });
-            $(".temp-up").click(function(event) {
-                $currentPercent -= $oneDegree;
-                $thermostat.up(1);
-                if ($thermostat._currentTemp <= $thermostat._maxTemp) {
-                    bubbleBackground();
-                    thermBackground();
-                    $(".thermometer").html($thermostat._currentTemp + "&deg;C");
-                } else {
-                    $(".error").html("Cannot exceed max temperature of " + $thermostat._maxTemp);
-                };
-            });
-            $(".temp-reset").click(function(event) {
-                $currentPercent = 35;
-                $thermostat.reset();
-                bubbleBackground();
-                thermBackground();
-                $(".thermometer").html($thermostat._currentTemp + "&deg;C");
-            });
-            $(".power-saving").click(function(event) {
-
-            });
-
-
-        });
-    </script>
     <div class="topbar">
         <h1>Thermostat</h1>
         <div class="error"></div>
@@ -89,14 +31,19 @@
             </div>
             <div class="power-saving">
                 <button class="power-saving-butt">
-                    POWER SAVING ON/OFF
+                    POWER SAVING OFF
                 </button>
             </div>
         </div>
         <div class="right">
             <div class="display">
-                <div class="thermometer">20&deg;C</div>
-                CURRENT TEMP MAX TEMP MIN TEMP ENERGY USAGE
+                <div class="thermometer">
+                    <span class="temp">20&deg;C</span>
+                    <span class="usage">Medium usage</span>
+                </div>
+                <div class="power-saving-status">
+                    <i class="fa fa-leaf" aria-hidden="true"></i>
+                </div>
             </div>
         </div>
     </main>
