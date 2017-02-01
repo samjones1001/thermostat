@@ -23,4 +23,7 @@ describe('Thermostat', function(){
     }
     expect(thermostat.getCurrentTemp()).toEqual(10);
   });
+  it('Default setting of power saving mode sets max temperature to 25 degrees', function(){
+    expect(thermostat.isPowerSave()).toBe(true);
+  });
 });

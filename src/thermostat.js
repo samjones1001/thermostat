@@ -3,6 +3,7 @@
 function Thermostat() {
   this.MINIMUM_TEMP = 10;
   this._temp = 20;
+  this.powerSaveStatus = true;
 };
 
 var thermostat = new Thermostat()
@@ -19,4 +20,7 @@ Thermostat.prototype.decrease = function() {
 }};
 Thermostat.prototype.isMinimumTemp = function(){
   return this._temp === this.MINIMUM_TEMP;
+};
+Thermostat.prototype.isPowerSave = function () {
+  return this.powerSaveStatus;
 };
