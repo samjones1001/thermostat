@@ -35,4 +35,12 @@ describe('Thermostat', function() {
         thermostat.switchPowerSaving();
         expect(thermostat._maxTemp).not.toEqual(defaultTemp)
     });
+    it('does not allow the max temp to be exceeded', function() {
+        var maxTemp = thermostat._maxTemp;
+        expect(function(){thermostat.up(6)}).toThrowError('Cannot exceed max temperature of ' + maxTemp)
+    });
+    it('can report energy usage', function() {
+        expect(thermostat.energyUsage()).toMatch('usage');
+    });
+
 });
