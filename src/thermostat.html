@@ -5,40 +5,58 @@
     <meta charset="UTF-8">
     <title>Thermostat</title>
     <script src="Thermostat.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+
+    <script>
+        $( document ).ready(function() {
+            $(".thermometer").css("background", "-webkit-linear-gradient(top, #fff 0%, #fff 33%, #db3f02 33%, #db3f02 100%")
+        });
+
+        $( ".temp-down" ).click(function( event ) {
+            alert( "DOWN!" );
+        });        
+     
+    </script>
+
     <h1>Thermostat</h1>
     <main>
         <div class="temp-controls">
-            <button class="temp-down">
+            <span class="temp-down">
                 DOWN
-            </button>
-            <button class="temp-up">
+            </span>
+            <span class="temp-up">
                 UP
-            </button>
-            <button class="temp-reset">
+            </span>
+            <span class="temp-reset">
                 RESET
-            </button>
+            </span>
         </div>
         <div class="power-saving">
-            <button class="power-saving-butt">
+            <span class="power-saving-butt">
                 POWER SAVING ON/OFF
-            </button>
+            </span>
         </div>
         <div class="display">
-            <div class="thermometer">
+            
+                <div class="thermometer">20&deg;C</div>
                 CURRENT TEMP
                 MAX TEMP
                 MIN TEMP
                 ENERGY USAGE
-            </div>
+            
             <div class="psmode">
                 POWER SAVING MODE
             </div>
         </div>
     </main>
+
 </body>
 
 </html>
