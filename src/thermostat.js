@@ -7,3 +7,6 @@ function Thermostat() {
 Thermostat.prototype.getCurrentTemp = function(){
   return this._temp
 };
+Thermostat.prototype.increase = function(){
+  this._temp += 1;
+};

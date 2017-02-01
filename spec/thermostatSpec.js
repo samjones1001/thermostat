@@ -9,4 +9,8 @@ describe('Thermostat', function(){
   it('It starts at 20 degrees - default temp', function(){
     expect(thermostat.getCurrentTemp()).toEqual(20)
   });
+  it('increases the temperature', function(){
+    thermostat.increase();
+    expect(thermostat.getCurrentTemp()).toEqual(21)
+  });
 });
