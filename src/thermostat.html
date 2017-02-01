@@ -14,12 +14,13 @@
     <script>
         $(document).ready(function() {
             $thermostat = new Thermostat;
-            var $currentPercent = $thermostat._currentTemp;
-            var $oneDegree = 5;
-            var $bubbleColor;
+            var $oneDegree = (100 / ($thermostat._maxTemp - $thermostat._minTemp));
+            var $currentPercent = ($thermostat._maxTemp - $thermostat._currentTemp) * $oneDegree;
+            var $bubbleColor = "orange";
             thermBackground = function() {
                 $(".thermometer").css("background", "-webkit-linear-gradient(top, #fff 0%, #fff " + $currentPercent + "%, " + $bubbleColor + " " + $currentPercent + "%, " + $bubbleColor + " 100%");
             };
+            thermBackground()
             bubbleBackground = function() {
                 $(".thermometer:before").css("background", $bubbleColor);
                 if ($thermostat._currentTemp < 18) {
@@ -31,7 +32,7 @@
                 } else {
                     $bubbleColor = "red";
                     $('head').append('<style>.thermometer:before, .thermometer:after{background:' + $bubbleColor + '!important;}</style>');
-                }
+                };
             };
             $(".temp-down").click(function(event) {
                 $currentPercent += $oneDegree;
@@ -41,7 +42,7 @@
                     thermBackground();
                     $(".thermometer").html($thermostat._currentTemp + "&deg;C");
                 } else {
-                    $("h2").html("Cannot lower temperature below " + $thermostat._minTemp);
+                    $(".error").html("Cannot lower temperature below " + $thermostat._minTemp);
                 };
             });
             $(".temp-up").click(function(event) {
@@ -52,7 +53,7 @@
                     thermBackground();
                     $(".thermometer").html($thermostat._currentTemp + "&deg;C");
                 } else {
-                    $("h2").html("Cannot exceed max temperature of " + $thermostat._maxTemp);
+                    $(".error").html("Cannot exceed max temperature of " + $thermostat._maxTemp);
                 };
             });
             $(".temp-reset").click(function(event) {
@@ -65,14 +66,13 @@
             $(".power-saving").click(function(event) {
 
             });
-            $("#regTitle").html("Hello World");
 
 
         });
     </script>
     <div class="topbar">
         <h1>Thermostat</h1>
-        <h2 class="error"></h2>
+        <div class="error"></div>
     </div>
     <main>
         <div class="left">
