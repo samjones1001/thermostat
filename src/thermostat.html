@@ -4,14 +4,19 @@
 	<title>Thermostat</title>
 	<meta charset="utf-8">
 	<script type="text/javascript" src="thermostat.js"></script>
+	<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
 	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+	<script type="text/javascript" src="interface.js"></script>
 	<div id="controls">
 		<button id="up">TEMPERATURE UP</button>
 		<button id="down">TEMPERATURE DOWN</button>
 		<button id="reset">RESET</button>
-	</div>	
+	</div>
 
     <div class="onoffswitch">
         <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
@@ -25,8 +30,9 @@
   	<div id="display">
   		<div id="currenttemp">CURRENT TEMPERATURE</div>
   		<div id="energyusage">LOW ENERGY</div>
+			<div id="powersaving">on</div>
   	</div>
 
 </label>
-</body>	
+</body>
 </html>
