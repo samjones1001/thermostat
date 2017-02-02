@@ -1,4 +1,4 @@
-    .onoffswitch {
+    .switch {
         position: relative; width: 90px;
         -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
     }
